@@ -30,8 +30,11 @@ app.get('/', userService.authenticateWithCookies, async (req, res) => {
     const token = req.cookies.token;
     const { userId } = jwt.verify(token, secretKey) as JwtPayload; // Specify return type as JwtPayload
 
+    const baseUrl = `${req.get('host')}`;
+
     const links = await urlService.getAllUrls(userId); // Pass userId to getAllUrls
-    res.render('home', { links });
+    res.render('home', { links, baseUrl });
+    console.log(baseUrl);
   } catch (error) {
     console.error('Error fetching links:', error);
     res.status(500).send('Internal Server Error');

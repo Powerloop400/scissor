@@ -111,6 +111,9 @@ var createCustomUrl = function (req, res) { return __awaiter(void 0, void 0, voi
         switch (_b.label) {
             case 0:
                 _a = req.body, longUrl = _a.longUrl, customAlias = _a.customAlias;
+                if (!longUrl.startsWith('http://') && !longUrl.startsWith('https://')) {
+                    longUrl = 'http://' + longUrl;
+                }
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);

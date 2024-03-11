@@ -82,17 +82,19 @@ app.set('views', path_1.default.join(__dirname, 'views'));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.get('/', userService.authenticateWithCookies, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, userId, links, error_1;
+    var token, userId, baseUrl, links, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 token = req.cookies.token;
                 userId = jsonwebtoken_1.default.verify(token, secretKey).userId;
+                baseUrl = "".concat(req.get('host'));
                 return [4 /*yield*/, urlService.getAllUrls(userId)];
             case 1:
                 links = _a.sent();
-                res.render('home', { links: links });
+                res.render('home', { links: links, baseUrl: baseUrl });
+                console.log(baseUrl);
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();

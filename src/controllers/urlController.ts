@@ -44,7 +44,11 @@ export const shortenUrl = async (req: Request, res: Response) => {
 
 
 export const createCustomUrl = async (req: Request, res: Response) => {
-  const { longUrl, customAlias } = req.body;
+  var { longUrl, customAlias } = req.body;
+
+  if (!longUrl.startsWith('http://') && !longUrl.startsWith('https://')) {
+      longUrl = 'http://' + longUrl;
+    }
 
   try {
     // Validate the input URL and custom alias

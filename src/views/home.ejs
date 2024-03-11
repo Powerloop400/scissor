@@ -70,15 +70,15 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
+      width: max-content;
+      }
 
     .link:hover {
       transform: translateY(-5px);
     }
 
     .link h2 {
-      font-size: 20px; /* Decreased font size */
+      font-size: 15px; /* Decreased font size */
       font-weight: bold;
       margin-bottom: 5px; /* Decreased margin */
       color: #333;
@@ -135,7 +135,7 @@
             <div class="links">
                 <% links.forEach(link => { %>
                     <div class="link">
-                        <h2><a href="<%= link.longUrl.startsWith('http') ? link.longUrl : 'http://' + link.longUrl %>" target="_blank"><%= link.shortUrl %></a></h2>
+                  <h2><a href="<%= link.longUrl.startsWith('http') ? link.longUrl : 'http://' + link.longUrl %>" target="_blank"><%= baseUrl %>/urls/<%= link.shortUrl %></a></h2>
                         <p><%= link.longUrl %></p>
                         <button onclick="generateQR('<%= link.shortUrl %>')">QR Code</button>
                     </div>
