@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo h1 {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ffc107;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .links {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .link {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .link:hover {
+      transform: translateY(-5px);
+    }
+
+    .link h2 {
+      font-size: 20px; /* Decreased font size */
+      font-weight: bold;
+      margin-bottom: 5px; /* Decreased margin */
+      color: #333;
+    }
+
+    .link h2 a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    .link p {
+      color: #666;
+      margin-bottom: 10px; /* Decreased margin */
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .declaration {
+      margin-top: 50px;
+      text-align: center;
+      margin-bottom: 50px;
+      color: #333;
+    }
+    </style>
+    <header>
+        <div class="logo">
+            <h1>Scissor</h1> <!-- Your logo -->
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/shorten">Shorten URL</a></li>
+                <li><a href="/custom">Custom URL</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <h2 class="declaration">Balogun Abdurrahman Mayowa's Altschool Africa Capstone Project</h2>
+
+        <% if (links.length > 0) { %>
+            <h2>Here are your links:</h2>
+            <div class="links">
+                <% links.forEach(link => { %>
+                    <div class="link">
+                        <h2><a href="<%= link.longUrl.startsWith('http') ? link.longUrl : 'http://' + link.longUrl %>" target="_blank"><%= link.shortUrl %></a></h2>
+                        <p><%= link.longUrl %></p>
+                        <button onclick="generateQR('<%= link.shortUrl %>')">QR Code</button>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <h2>You don't have any links yet.</h2>
+            <p>Create a link now.</p>
+        <% } %>
+    </main>
+
+    <script>
+        function generateQR(shortUrl) {
+            if (!shortUrl.startsWith('/urls')) {
+                shortUrl = '/urls/' + shortUrl;
+            }
+            window.location.href = shortUrl + '/qrcode';
+        }
+    </script>
+</body>
+</html>
